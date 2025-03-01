@@ -11,7 +11,13 @@ export async function loadSettings() {
             showPlatform: true,
             showCookiesEnabled: false,
             showSystemTime: false,
-            showBrowserTime: false
+            showBrowserTime: false,
+            showUserAgent: false,
+            showReferrer: false,
+            showJsEnabled: false,
+            showUptime: false,
+            showTabsCount: false,
+            showLastUpdate: false
         }, resolve);
     });
 }
@@ -28,7 +34,13 @@ export function saveSettings() {
         showPlatform: document.getElementById("togglePlatform").checked,
         showCookiesEnabled: document.getElementById("toggleCookiesEnabled").checked,
         showSystemTime: document.getElementById("toggleSystemTime").checked,
-        showBrowserTime: document.getElementById("toggleBrowserTime").checked
+        showBrowserTime: document.getElementById("toggleBrowserTime").checked,
+        showUserAgent: document.getElementById("toggleUserAgent").checked,
+        showReferrer: document.getElementById("toggleReferrer").checked,
+        showJsEnabled: document.getElementById("toggleJsEnabled").checked,
+        showUptime: document.getElementById("toggleUptime").checked,
+        showTabsCount: document.getElementById("toggleTabsCount").checked,
+        showLastUpdate: document.getElementById("toggleLastUpdate").checked
     };
     chrome.storage.sync.set(settings);
     updateTable();
@@ -54,4 +66,10 @@ export async function updateTable() {
     if (settings.showCookiesEnabled) document.getElementById("rowCookiesEnabled").style.display = "table-row";
     if (settings.showSystemTime) document.getElementById("rowSystemTime").style.display = "table-row";
     if (settings.showBrowserTime) document.getElementById("rowBrowserTime").style.display = "table-row";
+    if (settings.showUserAgent) document.getElementById("rowUserAgent").style.display = "table-row";
+    if (settings.showReferrer) document.getElementById("rowReferrer").style.display = "table-row";
+    if (settings.showJsEnabled) document.getElementById("rowJsEnabled").style.display = "table-row";
+    if (settings.showUptime) document.getElementById("rowUptime").style.display = "table-row";
+    if (settings.showTabsCount) document.getElementById("rowTabsCount").style.display = "table-row";
+    if (settings.showLastUpdate) document.getElementById("rowLastUpdate").style.display = "table-row";
 }

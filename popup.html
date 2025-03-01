@@ -53,7 +53,32 @@
                 <td class="label">Show Browser Time:</td>
                 <td><input type="checkbox" id="toggleBrowserTime" class="settings-toggle"></td>
             </tr>
+            <tr>
+                <td class="label">Show User Agent:</td>
+                <td><input type="checkbox" id="toggleUserAgent" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Referrer:</td>
+                <td><input type="checkbox" id="toggleReferrer" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show JavaScript Enabled:</td>
+                <td><input type="checkbox" id="toggleJsEnabled" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Browser Uptime:</td>
+                <td><input type="checkbox" id="toggleUptime" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Open Tabs:</td>
+                <td><input type="checkbox" id="toggleTabsCount" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Last Update:</td>
+                <td><input type="checkbox" id="toggleLastUpdate" class="settings-toggle"></td>
+            </tr>
         </table>
+        <button id="resetButton">Reset to Default</button>
     </div>
     <table class="info-table" style="display: none;">
         <tr id="rowIP">
@@ -99,6 +124,30 @@
         <tr id="rowBrowserTime">
             <td class="label">Browser Time:</td>
             <td id="browserTime" class="value">Determining...</td>
+        </tr>
+        <tr id="rowUserAgent">
+            <td class="label">User Agent:</td>
+            <td id="userAgent" class="value">Determining...</td>
+        </tr>
+        <tr id="rowReferrer">
+            <td class="label">Referrer:</td>
+            <td id="referrer" class="value">Determining...</td>
+        </tr>
+        <tr id="rowJsEnabled">
+            <td class="label">JavaScript Enabled:</td>
+            <td id="jsEnabled" class="value">Determining...</td>
+        </tr>
+        <tr id="rowUptime">
+            <td class="label">Browser Uptime:</td>
+            <td id="uptime" class="value">Calculating...</td>
+        </tr>
+        <tr id="rowTabsCount">
+            <td class="label">Open Tabs:</td>
+            <td id="tabsCount" class="value">Calculating...</td>
+        </tr>
+        <tr id="rowLastUpdate">
+            <td class="label">Last Update:</td>
+            <td id="lastUpdate" class="value">Calculating...</td>
         </tr>
     </table>
     <script type="module" src="popup.js"></script>

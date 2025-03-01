@@ -15,6 +15,12 @@ async function init() {
     const cookiesEnabledElement = document.getElementById("cookiesEnabled");
     const systemTimeElement = document.getElementById("systemTime");
     const browserTimeElement = document.getElementById("browserTime");
+    const userAgentElement = document.getElementById("userAgent");
+    const referrerElement = document.getElementById("referrer");
+    const jsEnabledElement = document.getElementById("jsEnabled");
+    const uptimeElement = document.getElementById("uptime");
+    const tabsCountElement = document.getElementById("tabsCount");
+    const lastUpdateElement = document.getElementById("lastUpdate");
 
     const settings = await loadSettings();
 
@@ -35,6 +41,12 @@ async function init() {
     document.getElementById("toggleCookiesEnabled").checked = settings.showCookiesEnabled;
     document.getElementById("toggleSystemTime").checked = settings.showSystemTime;
     document.getElementById("toggleBrowserTime").checked = settings.showBrowserTime;
+    document.getElementById("toggleUserAgent").checked = settings.showUserAgent;
+    document.getElementById("toggleReferrer").checked = settings.showReferrer;
+    document.getElementById("toggleJsEnabled").checked = settings.showJsEnabled;
+    document.getElementById("toggleUptime").checked = settings.showUptime;
+    document.getElementById("toggleTabsCount").checked = settings.showTabsCount;
+    document.getElementById("toggleLastUpdate").checked = settings.showLastUpdate;
 
     // Get external IP via ipify API
     if (settings.showIP) {
@@ -125,6 +137,46 @@ async function init() {
         document.getElementById("rowBrowserTime").style.display = "table-row";
     }
 
+    // Get user agent
+    if (settings.showUserAgent) {
+        userAgentElement.textContent = navigator.userAgent;
+        document.getElementById("rowUserAgent").style.display = "table-row";
+    }
+
+    // Get referrer
+    if (settings.showReferrer) {
+        referrerElement.textContent = document.referrer || "No referrer";
+        document.getElementById("rowReferrer").style.display = "table-row";
+    }
+
+    // Get JavaScript enabled status
+    if (settings.showJsEnabled) {
+        jsEnabledElement.textContent = "Yes";
+        document.getElementById("rowJsEnabled").style.display = "table-row";
+    }
+
+    // Get browser uptime
+    if (settings.showUptime) {
+        const uptime = Math.round(performance.now() / 1000); // uptime in seconds
+        uptimeElement.textContent = `${uptime} seconds`;
+        document.getElementById("rowUptime").style.display = "table-row";
+    }
+
+    // Get number of open tabs
+    if (settings.showTabsCount) {
+        chrome.tabs.query({}, function(tabs) {
+            tabsCountElement.textContent = tabs.length;
+            document.getElementById("rowTabsCount").style.display = "table-row";
+        });
+    }
+
+    // Get last update time
+    if (settings.showLastUpdate) {
+        const lastUpdate = new Date(document.lastModified).toLocaleString();
+        lastUpdateElement.textContent = lastUpdate;
+        document.getElementById("rowLastUpdate").style.display = "table-row";
+    }
+
     // Show the info table
     document.querySelector(".info-table").style.display = "table";
 
@@ -139,5 +191,14 @@ async function init() {
     // Save settings
     document.querySelectorAll(".settings-toggle").forEach(toggle => {
         toggle.addEventListener("change", saveSettings);
+    });
+
+    // Reset settings
+    document.getElementById("resetButton").addEventListener("click", resetSettings);
+}
+
+function resetSettings() {
+    chrome.storage.sync.clear(() => {
+        location.reload();
     });
 }
