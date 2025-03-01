@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 15px;
+    width: 300px;
+    background: #f4f4f4;
+    text-align: center;
+}
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tabs {
+    margin-bottom: 10px;
+}
+.tab-button {
+    padding: 10px;
+    cursor: pointer;
+    background: #378372;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 49%;
+}
+.tab-button:hover {
+    background: #0056b3;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+.info-table, .settings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+.info-table .label, .settings-table .label {
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    padding: 8px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+}
+.info-table .value {
+    color: #007bff;
+    text-align: right;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+.settings {
+    display: none;
+}
+.settings.active {
+    display: block;
+}
+.settings-icon {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}

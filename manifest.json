@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "IP & Browser Info",
+  "version": "1.0",
+  "description": "Shows external IP, IPv6, browser, and OS",
+  "permissions": ["tabs", "storage"],
+  "host_permissions": ["https://api64.ipify.org/"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

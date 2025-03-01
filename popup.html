@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IP & Browser Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>IP & Browser Info <button id="settingsButton" class="settings-icon">&#9881;</button></h2>
+    <div id="settings" class="settings">
+        <table class="settings-table">
+            <tr>
+                <td class="label">Show IP:</td>
+                <td><input type="checkbox" id="toggleIP" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show IPv6:</td>
+                <td><input type="checkbox" id="toggleIPv6" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Browser:</td>
+                <td><input type="checkbox" id="toggleBrowser" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show OS:</td>
+                <td><input type="checkbox" id="toggleOS" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Load Time:</td>
+                <td><input type="checkbox" id="toggleLoadTime" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Screen Resolution:</td>
+                <td><input type="checkbox" id="toggleScreenResolution" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Language:</td>
+                <td><input type="checkbox" id="toggleLanguage" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Platform:</td>
+                <td><input type="checkbox" id="togglePlatform" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Cookies Enabled:</td>
+                <td><input type="checkbox" id="toggleCookiesEnabled" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show System Time:</td>
+                <td><input type="checkbox" id="toggleSystemTime" class="settings-toggle"></td>
+            </tr>
+            <tr>
+                <td class="label">Show Browser Time:</td>
+                <td><input type="checkbox" id="toggleBrowserTime" class="settings-toggle"></td>
+            </tr>
+        </table>
+    </div>
+    <table class="info-table" style="display: none;">
+        <tr id="rowIP">
+            <td class="label">IP:</td>
+            <td id="ip" class="value">Loading...</td>
+        </tr>
+        <tr id="rowIPv6">
+            <td class="label">IPv6:</td>
+            <td id="ipv6" class="value">Loading...</td>
+        </tr>
+        <tr id="rowBrowser">
+            <td class="label">Browser:</td>
+            <td id="browser" class="value">Determining...</td>
+        </tr>
+        <tr id="rowOS">
+            <td class="label">OS:</td>
+            <td id="os" class="value">Determining...</td>
+        </tr>
+        <tr id="rowLoadTime">
+            <td class="label">Load Time:</td>
+            <td id="loadTime" class="value">Calculating...</td>
+        </tr>
+        <tr id="rowScreenResolution">
+            <td class="label">Screen Resolution:</td>
+            <td id="screenResolution" class="value">Determining...</td>
+        </tr>
+        <tr id="rowLanguage">
+            <td class="label">Language:</td>
+            <td id="language" class="value">Determining...</td>
+        </tr>
+        <tr id="rowPlatform">
+            <td class="label">Platform:</td>
+            <td id="platform" class="value">Determining...</td>
+        </tr>
+        <tr id="rowCookiesEnabled">
+            <td class="label">Cookies Enabled:</td>
+            <td id="cookiesEnabled" class="value">Determining...</td>
+        </tr>
+        <tr id="rowSystemTime">
+            <td class="label">System Time:</td>
+            <td id="systemTime" class="value">Determining...</td>
+        </tr>
+        <tr id="rowBrowserTime">
+            <td class="label">Browser Time:</td>
+            <td id="browserTime" class="value">Determining...</td>
+        </tr>
+    </table>
+    <script type="module" src="popup.js"></script>
+</body>
+</html>
