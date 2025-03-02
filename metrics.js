@@ -80,8 +80,13 @@ export function getJsEnabled(elements) {
 }
 
 export function getUptime(elements) {
-    const uptime = Math.round(performance.now() / 1000); // uptime in seconds
-    elements.uptime.textContent = `${uptime} seconds`;
+    chrome.runtime.sendMessage({ action: "getUptime" }, response => {
+        const uptime = response.uptime;
+        const hours = Math.floor(uptime / 3600);
+        const minutes = Math.floor((uptime % 3600) / 60);
+        const seconds = uptime % 60;
+        elements.uptime.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    });
 }
 
 export function getTabsCount(elements) {
