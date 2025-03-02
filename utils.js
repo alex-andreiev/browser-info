@@ -22,3 +22,14 @@ export function getOSInfo(userAgent) {
     if (userAgent.includes("iPhone")) return "iOS";
     return "Unknown";
 }
+
+export function generateKey(key, prefix) {
+    const ACRONYMS = ["ip", "ipv6", "os"];
+    let suffix = key;
+    if (ACRONYMS.includes(key)) {
+        suffix = key.charAt(0).toUpperCase() + key.charAt(1).toUpperCase() + key.slice(2);
+    } else {
+        suffix = key.charAt(0).toUpperCase() + key.slice(1);
+    }
+    return prefix + suffix;
+}
