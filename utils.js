@@ -1,3 +1,5 @@
+import { ACRONYMS } from './constants.js';
+
 export function getBrowserInfo(userAgent) {
     if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
         return `Google Chrome ${navigator.appVersion.match(/Chrome\/(\d+\.\d+)/)[1]}`;
@@ -23,8 +25,7 @@ export function getOSInfo(userAgent) {
     return "Unknown";
 }
 
-export function generateKey(key, prefix) {
-    const ACRONYMS = ["ip", "ipv6", "os"];
+export function generateKey(key, prefix = "") {
     let suffix = key;
     if (ACRONYMS.includes(key)) {
         suffix = key.charAt(0).toUpperCase() + key.charAt(1).toUpperCase() + key.slice(2);
@@ -32,4 +33,11 @@ export function generateKey(key, prefix) {
         suffix = key.charAt(0).toUpperCase() + key.slice(1);
     }
     return prefix + suffix;
+}
+
+export function generateLabel(key) {
+    if (ACRONYMS.includes(key)) {
+        return key.charAt(0).toUpperCase() + key.charAt(1).toUpperCase() + key.slice(2);
+    }
+    return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
 }

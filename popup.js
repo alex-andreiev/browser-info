@@ -1,5 +1,5 @@
 import { loadSettings, saveSettings, updateTable } from './settings.js';
-import { generateKey } from './utils.js';
+import { generateKey, generateLabel } from './utils.js';
 import { METRICS } from './constants.js';
 import * as metrics from './metrics.js';
 
@@ -39,7 +39,16 @@ async function init() {
 
     // Save settings
     document.querySelectorAll(".settings-toggle").forEach(toggle => {
-        toggle.addEventListener("change", saveSettings);
+        toggle.addEventListener("change", async () => {
+            saveSettings();
+            const key = toggle.id.replace('toggle', '').toLowerCase();
+            if (toggle.checked) {
+                await metrics[generateKey(key, 'get')](elements);
+                document.getElementById(generateKey(key, 'row')).style.display = "table-row";
+            } else {
+                document.getElementById(generateKey(key, 'row')).style.display = "none";
+            }
+        });
     });
 
     // Reset settings
@@ -70,3 +79,34 @@ function resetSettings() {
         location.reload();
     });
 }
+
+function generateTable() {
+    const infoTable = document.querySelector(".info-table");
+    const settingsTable = document.querySelector(".settings-table");
+
+    METRICS.forEach(({ key }) => {
+        const rowId = generateKey(key, 'row');
+        const elementId = key;
+        const checkboxId = generateKey(key, 'toggle');
+        const label = generateLabel(key);
+
+        // Info table row
+        const infoRow = document.createElement("tr");
+        infoRow.id = rowId;
+        infoRow.innerHTML = `
+            <td class="label">${label}:</td>
+            <td id="${elementId}" class="value">Loading...</td>
+        `;
+        infoTable.appendChild(infoRow);
+
+        // Settings table row
+        const settingsRow = document.createElement("tr");
+        settingsRow.innerHTML = `
+            <td class="label">${label}:</td>
+            <td><input type="checkbox" id="${checkboxId}" class="settings-toggle"></td>
+        `;
+        settingsTable.appendChild(settingsRow);
+    });
+}
+
+generateTable();
