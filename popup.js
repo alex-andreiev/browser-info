@@ -1,7 +1,7 @@
-import { loadSettings, saveSettings, updateTable } from './settings.js';
-import { generateKey, generateLabel } from './utils.js';
-import { METRICS } from './constants.js';
-import * as metrics from './metrics.js';
+import { loadSettings, saveSettings, updateTable } from './src/settings.js';
+import { generateKey, generateLabel } from './src/utils.js';
+import { METRICS } from './src/constants.js';
+import * as metrics from './src/metrics/index.js';
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -21,8 +21,11 @@ async function init() {
     METRICS.forEach(({ key }) => {
         const settingId = generateKey(key, 'show');
         if (settings[settingId]) {
-            metrics[generateKey(key, 'get')](elements);
-            document.getElementById(generateKey(key, 'row')).style.display = "table-row";
+            const metricFunction = `get${generateKey(key, '')}`;
+            if (typeof metrics[metricFunction] === 'function') {
+                metrics[metricFunction](elements);
+                document.getElementById(generateKey(key, 'row')).style.display = "table-row";
+            }
         }
     });
 
@@ -42,8 +45,9 @@ async function init() {
         toggle.addEventListener("change", async () => {
             saveSettings();
             const key = toggle.id.replace('toggle', '').toLowerCase();
-            if (toggle.checked) {
-                await metrics[generateKey(key, 'get')](elements);
+            const metricFunction = generateKey(key, get);
+            if (toggle.checked && typeof metrics[metricFunction] === 'function') {
+                await metrics[metricFunction](elements);
                 document.getElementById(generateKey(key, 'row')).style.display = "table-row";
             } else {
                 document.getElementById(generateKey(key, 'row')).style.display = "none";

@@ -1,12 +1,12 @@
-import { ACRONYMS } from './constants.js';
+import { ACRONYM_REGEXES, CAPITALIZE_FIRST_REGEX, INSERT_SPACES_REGEX, BROWSER_REGEXES } from './constants.js';
 
 export function getBrowserInfo(userAgent) {
     if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
-        return `Google Chrome ${navigator.appVersion.match(/Chrome\/(\d+\.\d+)/)[1]}`;
+        return `Google Chrome ${navigator.appVersion.match(BROWSER_REGEXES.chrome)[1]}`;
     } else if (userAgent.includes("Firefox")) {
-        return `Mozilla Firefox ${navigator.appVersion.match(/Firefox\/(\d+\.\d+)/)[1]}`;
+        return `Mozilla Firefox ${navigator.appVersion.match(BROWSER_REGEXES.firefox)[1]}`;
     } else if (userAgent.includes("Edg")) {
-        return `Microsoft Edge ${navigator.appVersion.match(/Edg\/(\d+\.\d+)/)[1]}`;
+        return `Microsoft Edge ${navigator.appVersion.match(BROWSER_REGEXES.edge)[1]}`;
     } else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
         return "Safari";
     } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
@@ -27,17 +27,16 @@ export function getOSInfo(userAgent) {
 
 export function generateKey(key, prefix = "") {
     let suffix = key;
-    if (ACRONYMS.includes(key)) {
-        suffix = key.charAt(0).toUpperCase() + key.charAt(1).toUpperCase() + key.slice(2);
-    } else {
-        suffix = key.charAt(0).toUpperCase() + key.slice(1);
-    }
-    return prefix + suffix;
+    ACRONYM_REGEXES.forEach(regex => {
+        suffix = suffix.replace(regex, match => match.toUpperCase());
+    });
+    return prefix + suffix.charAt(0).toUpperCase() + suffix.slice(1);
 }
 
 export function generateLabel(key) {
-    if (ACRONYMS.includes(key)) {
-        return key.charAt(0).toUpperCase() + key.charAt(1).toUpperCase() + key.slice(2);
-    }
-    return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+    let label = key;
+    ACRONYM_REGEXES.forEach(regex => {
+        label = label.replace(regex, match => match.toUpperCase());
+    });
+    return label.replace(INSERT_SPACES_REGEX, ' $1').replace(CAPITALIZE_FIRST_REGEX, str => str.toUpperCase());
 }
