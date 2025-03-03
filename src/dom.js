@@ -94,14 +94,6 @@ export function saveSettingsBtn() {
             const metricFunction = generateKey(key, 'get');
             const rowElement = document.getElementById(generateKey(key, 'row'));
 
-            console.log({
-              key: key,
-              metricFunction: metricFunction,
-              rowElement: rowElement,
-              toggle_checked: toggle.checked,
-              function: typeof metrics[metricFunction] === 'function'
-            })
-
             if (toggle.checked && typeof metrics[metricFunction] === 'function') {
                 await metrics[metricFunction](getElements());
                 if (rowElement) {
