@@ -25,7 +25,7 @@ export const METRICS = [
 ];
 
 export const ACRONYMS = [
-  "ip", "os"
+  "ip", "os", "ipv6", "localIp"
 ];
 
 export const ACRONYM_REGEXES = ACRONYMS.map(acronym => new RegExp(`\\b${acronym}\\b`, 'gi'));

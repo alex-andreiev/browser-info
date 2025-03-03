@@ -47,7 +47,7 @@ h2 {
     padding: 8px;
     background: #f9f9f9;
     border: 1px solid #ddd;
-    width: 50%; /* Widen the label cells */
+    width: 40%; /* Widen the label cells */
 }
 .info-table .value {
     color: #007bff;

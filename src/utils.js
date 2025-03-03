@@ -27,16 +27,15 @@ export function getOSInfo(userAgent) {
 
 export function generateKey(key, prefix = "") {
     let suffix = key;
-    ACRONYM_REGEXES.forEach(regex => {
-        suffix = suffix.replace(regex, match => match.toUpperCase());
-    });
     return prefix + suffix.charAt(0).toUpperCase() + suffix.slice(1);
 }
 
 export function generateLabel(key) {
     let label = key;
+    label = label.replace(INSERT_SPACES_REGEX, ' $1')
+                 .replace(CAPITALIZE_FIRST_REGEX, str => str.toUpperCase());
     ACRONYM_REGEXES.forEach(regex => {
         label = label.replace(regex, match => match.toUpperCase());
     });
-    return label.replace(INSERT_SPACES_REGEX, ' $1').replace(CAPITALIZE_FIRST_REGEX, str => str.toUpperCase());
+    return label
 }

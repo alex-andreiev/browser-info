@@ -20,8 +20,7 @@ export function saveSettings() {
         return acc;
     }, {});
 
-    chrome.storage.sync.set(settings);
-    updateTable();
+    chrome.storage.sync.set(settings, updateTable);
 }
 
 export async function updateTable() {
@@ -39,5 +38,11 @@ export async function updateTable() {
         if (settings[settingId]) {
             document.getElementById(rowId).style.display = "table-row";
         }
+    });
+}
+
+export function resetSettings() {
+    chrome.storage.sync.clear(() => {
+        location.reload();
     });
 }
