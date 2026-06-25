@@ -1,12 +1,17 @@
 import { ACRONYM_REGEXES, CAPITALIZE_FIRST_REGEX, INSERT_SPACES_REGEX, BROWSER_REGEXES } from './constants.js';
 
-export function getBrowserInfo(userAgent) {
+export function getBrowserInfo(userAgent, appVersion = "") {
+    if (!userAgent) return "Unknown";
+    
     if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
-        return `Google Chrome ${navigator.appVersion.match(BROWSER_REGEXES.chrome)[1]}`;
+        const match = appVersion.match(BROWSER_REGEXES.chrome);
+        return match ? `Google Chrome ${match[1]}` : "Google Chrome";
     } else if (userAgent.includes("Firefox")) {
-        return `Mozilla Firefox ${navigator.appVersion.match(BROWSER_REGEXES.firefox)[1]}`;
+        const match = appVersion.match(BROWSER_REGEXES.firefox);
+        return match ? `Mozilla Firefox ${match[1]}` : "Mozilla Firefox";
     } else if (userAgent.includes("Edg")) {
-        return `Microsoft Edge ${navigator.appVersion.match(BROWSER_REGEXES.edge)[1]}`;
+        const match = appVersion.match(BROWSER_REGEXES.edge);
+        return match ? `Microsoft Edge ${match[1]}` : "Microsoft Edge";
     } else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
         return "Safari";
     } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {

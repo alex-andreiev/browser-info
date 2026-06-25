@@ -4,7 +4,7 @@ export async function getIpv6(elements) {
         const response = await fetch("https://api64.ipify.org?format=json&ipv6=true");
         const data = await response.json();
         elements.ipv6.textContent = data.ip;
-    } catch (error) {
+    } catch (_error) {
         elements.ipv6.textContent = "Error getting IPv6";
     }
 }

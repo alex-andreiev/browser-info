@@ -4,7 +4,7 @@ export async function getIp(elements) {
         const response = await fetch("https://api64.ipify.org?format=json");
         const data = await response.json();
         elements.ip.textContent = data.ip;
-    } catch (error) {
+    } catch (_error) {
         elements.ip.textContent = "Error getting IP";
     }
 }
